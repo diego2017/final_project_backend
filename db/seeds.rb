@@ -9,10 +9,10 @@
 puts "Welcome to this seed script :)"
 
 
-s1 = Student.create(first_name:'Diego', last_name:'Villanueva', bio:'bla bla bla', email:'diego@a.com', linkedin_id:'2342ff24@', linkedin_url:'ajsoa.com', facebook_url:'afgwif.com', github_url:'sds.com', website_url:'asa.com', img_url:'asaasa.com')
+s1 = Student.create(first_name:'Diego', last_name:'Villanueva', bio:'bla bla bla', email:'diego@a.com', linkedin_id:'2342ff24@', linkedin_url:'ajsoa.com', facebook_url:'afgwif.com', github_url:'sds.com', website_url:'asa.com', img_url:'https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png')
 
-c1 = Course.create(name:'WDI 20')
-c2 = Course.create(name:'WDI 19')
+c1 = Course.create(name:'WDI 19')
+c2 = Course.create(name:'WDI 20')
 c3 = Course.create(name:'WDI 21')
 
 sk1 = Skill.create(name:'CSS')
@@ -32,7 +32,6 @@ s1.interests << i2
 s1.interests << i3
 
 s1.courses << c1
-s1.courses << c2
-s1.courses << c3
+
 
 puts "Our job here is done!"
