@@ -2,7 +2,10 @@ class StudentsController < ApplicationController
   before_action :authenticate_student!, only: [:index]
 
   def index
-    render json: Student.all.to_json(include:[:skills, :interests, :courses])
+    render json: Student.all.to_json
+
+    # # we only send student at the moment. Skills, interests and courses are only another column in student at the moment
+    # render json: Student.all.to_json(include:[:skills, :interests, :courses])
   end
 
   def create
@@ -29,11 +32,24 @@ class StudentsController < ApplicationController
 
   def update
     @student = Student.find(params[:id])
+    newCohort = params[:cohort]
     newBio = params[:bio]
+    newSkills = params[:skills]
+    newInterests = params[:interests]
+    newLinkedin_url = params[:linkedin_url]
+    newGithub_url = params[:github_url]
+    newFacebook_url = params[:facebook_url]
+    newWebsite_url = params[:website_url]
 
-    # change the bio
+    # change student
+    @student.cohort = newCohort
     @student.bio = newBio
-
+    @student.skills = newSkills
+    @student.interests = newInterests
+    @student.linkedin_url = newLinkedin_url
+    @student.github_url = newGithub_url
+    @student.facebook_url = newFacebook_url
+    @student.website_url = newWebsite_url
 
     # save student with new data
     if !@student.save
@@ -41,34 +57,6 @@ class StudentsController < ApplicationController
     else
       render json: {message: "success"}
     end
-
-    # binding.pry
-  #
-  #   # This is the magic stuff that will let us upload an image to Cloudinary when creating a new animal.
-  #   # First, check to see if the user has attached an image for uploading
-  #   if params[:file].present?
-  #     # Then call Cloudinary's upload method, passing in the file in params
-  #     req = Cloudinary::Uploader.upload(params[:file])
-  #     # Using the public_id allows us to use Cloudinary's image transformation methods.
-  #     @place.image = req["public_id"]
-  #     @place.save
-  #   end
-  #
-  #   # update features
-  #   # first delete all associations
-  #   @place.features.delete_all
-  #   # then recreate each feature association that was checked in the form
-  #   params[:features].each do |feature_id|
-  #     @place.features << Feature.find( feature_id )
-  #   end
-  #
-  #   # @place.user = @current_user
-  #
-  #   if @place.update_attributes(clean_params)
-  #     redirect_to controller: "places", action: "show", place_id: @place.id
-  #   else
-  #     render :edit
-  #   end
   end
 
 end
