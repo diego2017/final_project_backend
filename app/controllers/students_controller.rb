@@ -31,6 +31,7 @@ class StudentsController < ApplicationController
 
 
   def update
+    binding.pry
     @student = Student.find(params[:id])
     newCohort = params[:cohort]
     newBio = params[:bio]
@@ -42,6 +43,7 @@ class StudentsController < ApplicationController
     newWebsite_url = params[:website_url]
 
     # change student
+    binding.pry
     @student.cohort = newCohort
     @student.bio = newBio
     @student.skills = newSkills
@@ -51,6 +53,7 @@ class StudentsController < ApplicationController
     @student.facebook_url = newFacebook_url
     @student.website_url = newWebsite_url
 
+binding.pry
     # save student with new data
     if !@student.save
       render json: {message: "could not save record"}, status: :bad_request
